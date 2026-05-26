@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local SlowMo Frame Support</title>
+  <meta name="description" content="Support information for Local SlowMo Frame.">
+  <style>
+    :root {
+      --bg: #f7f8fa;
+      --surface: #ffffff;
+      --text: #111111;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --blue: #1677ff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #fbfcfe 0%, var(--bg) 100%);
+      color: var(--text);
+    }
+
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 32px 20px 56px;
+    }
+
+    .nav,
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .nav {
+      margin-bottom: 36px;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(32px, 6vw, 52px);
+      line-height: 1;
+    }
+
+    p,
+    li {
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    .hero,
+    .card {
+      background: var(--surface);
+      border: 1px solid rgba(17, 17, 17, 0.05);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: 0 10px 24px rgba(17, 17, 17, 0.05);
+    }
+
+    .hero {
+      margin-bottom: 18px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .footer {
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 720px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="nav">
+      <a href="./index.html">Local SlowMo Frame</a>
+      <a href="./privacy.html">Privacy Policy</a>
+    </div>
+
+    <section class="hero">
+      <h1>Support</h1>
+      <p>If you need help with Local SlowMo Frame, have a bug report, or want to request a feature, please contact us using the email below.</p>
+      <p><strong>Support Email:</strong> <a href="mailto:qiujun1464662421@qq.com">qiujun1464662421@qq.com</a></p>
+    </section>
+
+    <div class="grid">
+      <section class="card">
+        <h2>Common Questions</h2>
+        <ul>
+          <li>The app needs Photo Library access to import videos and save edited clips.</li>
+          <li>Videos are processed locally on the device.</li>
+          <li>Exported videos are saved back to Photos.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>When contacting support</h2>
+        <ul>
+          <li>Describe what you were trying to do</li>
+          <li>Include your device model and iOS version</li>
+          <li>Share screenshots if something looks wrong</li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="footer">
+      <span>Local SlowMo Frame Support</span>
+      <span><a href="./index.html">Marketing Page</a></span>
+    </div>
+  </div>
+</body>
+</html>
