@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local SlowMo Frame</title>
+  <meta name="description" content="Frame-accurate slow motion video editing on iPhone. Fully local, private, and easy to use.">
+  <style>
+    :root {
+      --bg: #f7f8fa;
+      --surface: #ffffff;
+      --text: #111111;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --blue: #1677ff;
+      --blue-dark: #0e5fd1;
+      --green: #1e9b5a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(22, 119, 255, 0.08), transparent 36%),
+        linear-gradient(180deg, #fbfcfe 0%, var(--bg) 100%);
+      color: var(--text);
+    }
+
+    .page {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 32px 20px 56px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .brand {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a,
+    .footer a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+
+    .hero-copy h1 {
+      margin: 0 0 14px;
+      font-size: clamp(38px, 7vw, 64px);
+      line-height: 0.98;
+    }
+
+    .hero-copy p {
+      margin: 0 0 18px;
+      max-width: 560px;
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .badges {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .badge {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(22, 119, 255, 0.08);
+      color: var(--blue-dark);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .button-primary {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .button-secondary {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    .phone {
+      justify-self: center;
+      width: min(100%, 350px);
+      padding: 18px;
+      border-radius: 34px;
+      background: #111;
+      box-shadow: 0 22px 50px rgba(17, 17, 17, 0.2);
+    }
+
+    .phone-screen {
+      border-radius: 24px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #f9fbff 0%, #f3f5f8 100%);
+      aspect-ratio: 390 / 844;
+      padding: 22px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .phone-title {
+      margin-top: 46px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .phone-subtitle {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .import-card {
+      margin-top: 28px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #1d7bff 0%, #1663ef 100%);
+      color: white;
+      min-height: 96px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 700;
+      box-shadow: 0 18px 32px rgba(22, 119, 255, 0.26);
+    }
+
+    .phone-note {
+      margin-top: auto;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .chip-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .chip {
+      padding: 8px 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: white;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin: 28px 0 24px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid rgba(17, 17, 17, 0.05);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 10px 24px rgba(17, 17, 17, 0.05);
+    }
+
+    .card h2,
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .card p,
+    .card li {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+
+    .footer {
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 860px) {
+      .hero,
+      .section-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        order: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="nav">
+      <div class="brand">Local SlowMo Frame</div>
+      <div class="nav-links">
+        <a href="./support.html">Support</a>
+        <a href="./privacy.html">Privacy</a>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <h1>Local Slow Motion, Frame by Frame.</h1>
+        <p>Local SlowMo Frame is a focused iPhone tool for precise slow-motion edits. Import a video, choose the exact segment you want to slow down, preview it, and save the result back to Photos.</p>
+        <div class="badges">
+          <span class="badge">On-device editing</span>
+          <span class="badge">Frame-accurate timeline</span>
+          <span class="badge">No account required</span>
+        </div>
+        <div class="actions">
+          <a class="button button-primary" href="./support.html">Get Support</a>
+          <a class="button button-secondary" href="./privacy.html">Privacy Policy</a>
+        </div>
+      </div>
+
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-title">Local SlowMo Frame</div>
+          <div class="phone-subtitle">Precise slow motion, fully on device</div>
+          <div class="import-card">Import Video</div>
+          <div class="phone-note">No upload. No cloud. Save directly to Photos.</div>
+          <div class="chip-row">
+            <span class="chip">MP4</span>
+            <span class="chip">MOV</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-grid">
+      <div class="card">
+        <h3>Import</h3>
+        <p>Select a video directly from your photo library and start editing in seconds.</p>
+      </div>
+      <div class="card">
+        <h3>Edit</h3>
+        <p>Use a frame-accurate timeline to set the exact start and end of the slow-motion segment.</p>
+      </div>
+      <div class="card">
+        <h3>Export</h3>
+        <p>Preview the result and save the edited clip back to Photos without a watermark.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Why people use Local SlowMo Frame</h2>
+      <ul>
+        <li>Sports highlights, pet clips, dance practice, and motion analysis</li>
+        <li>Fast edits without learning a complex multi-track editor</li>
+        <li>Better privacy because videos stay on the device</li>
+      </ul>
+    </section>
+
+    <div class="footer">
+      <span>Support: support through the contact details on the support page</span>
+      <span><a href="./support.html">Support URL</a> · <a href="./privacy.html">Privacy Policy</a></span>
+    </div>
+  </div>
+</body>
+</html>
